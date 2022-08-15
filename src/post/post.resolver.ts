@@ -63,10 +63,14 @@ export class PostResolver{
 
 
 // query{
-//     getOne(getById:{ _id:"62fa031ccd1170a26610f427"}){
+//     getOne(getById:{ _id:"62fa00010899ef963da36dc0"}){
+//      result{
+//       _id,
 //      description,
-//      channel
+//      channel,
+//      },
+//      success,
+//      error,
+//      messsage
 //    }
-     
 //    }
-   

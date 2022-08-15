@@ -20,20 +20,23 @@ export class PostService{
     async getById(id: string): Promise< PostModelbyID | PostALL >{
         console.log(id);
         const user  = await this.PostModel.findOne({_id: id}).exec();
-        console.log(user.channel);
+        //console.log(user.channel);
         const r:PostModelbyID = new PostModelbyID();
       
         r._id = id;
         r.error = false;
-        r.result =JSON.parse( JSON.stringify(user) );
+        r.result =JSON.parse(JSON.stringify(user));
         r.success = true;
         r.messsage = "Successfully"
-       // r.result =  JSON.stringify(user);
-        //r.channel = user.channel;
-
+      
         if(!user){
-            throw new Error(`User ${id} not found`);
-
+            //throw new Error(`User ${id} not found`);
+            r._id = id;
+            r.error = true;
+            r.result =JSON.parse( JSON.stringify(user) );
+            r.success = false;
+            r.messsage = "Unsuccessful"
+            return r;
         }
         return r;
     }
