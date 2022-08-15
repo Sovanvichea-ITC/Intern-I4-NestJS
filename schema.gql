@@ -1,0 +1,28 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PostModel {
+  id: ID!
+  description: String!
+  channel: String!
+}
+
+type Query {
+  getPost: [PostModel!]!
+  getOne(getById: PostInputByID!): PostModel!
+}
+
+input PostInputByID {
+  _id: String!
+}
+
+type Mutation {
+  createPost(crepost: PostInput!): PostModel!
+  delbyID(deletebyid: PostInputByID!): PostModel!
+}
+
+input PostInput {
+  description: String!
+  channel: String!
+}
