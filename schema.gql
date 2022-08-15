@@ -35,7 +35,7 @@ input PostInputByID {
 
 type Mutation {
   createPost(crepost: PostInput!): PostModel!
-  delbyID(deletebyid: PostInputByID!): PostModel!
+  delbyID(deletebyid: PostInputByID!): PostModelbyID!
 }
 
 input PostInput {

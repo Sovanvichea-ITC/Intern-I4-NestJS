@@ -19,15 +19,12 @@ export class PostResolver{
 
     @Query(() => PostModelbyID, {nullable:true})
     async getOne(@Args('getById') findbyid: PostInputByID){
-        console.log("ddd",findbyid)
         const user = await this.PostService.getById(findbyid._id)
-        console.log(user)
         return user;
     }
 
-    @Mutation(() => PostModel)
+    @Mutation(() => PostModelbyID)
     async delbyID(@Args('deletebyid') deleteById: PostInputByID){
-        console.log(deleteById);
         return await this.PostService.deleteById(deleteById._id)
     }
 }

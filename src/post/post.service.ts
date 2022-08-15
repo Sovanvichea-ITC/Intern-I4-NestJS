@@ -41,10 +41,22 @@ export class PostService{
         return r;
     }
 
-    async deleteById(id: string): Promise<any>{ 
-        const user = await this.PostModel.remove({_id: id})
-        console.log('tag', user);
-        return "sucessfully"
+    async deleteById(id: string): Promise<PostModelbyID | any>{ 
+        const user = await this.PostModel.deleteOne({_id: id})
+        const r:PostModelbyID = new PostModelbyID();
+       
+        r.error = false;
+        r.success = true;
+        r.messsage = "Successfully Deleted";
+      
+        if(!user.deletedCount){
+            //throw new Error(`User ${id} not found`);
+            r.error = true;
+            r.success = false;
+            r.messsage = "Unsuccessful Delete"
+            return r;
+        }
+        return r;
     }
 
 }
