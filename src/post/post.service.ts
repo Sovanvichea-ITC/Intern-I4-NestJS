@@ -18,45 +18,80 @@ export class PostService{
     }
 
     async getById(id: string): Promise< PostModelbyID | PostALL >{
-        console.log(id);
         const user  = await this.PostModel.findOne({_id: id}).exec();
-        //console.log(user.channel);
-        const r:PostModelbyID = new PostModelbyID();
+        const response:PostModelbyID = new PostModelbyID();
       
-        r._id = id;
-        r.error = false;
-        r.result =JSON.parse(JSON.stringify(user));
-        r.success = true;
-        r.messsage = "Successfully"
+        response._id = id;
+        response.error = false;
+        response.result =JSON.parse(JSON.stringify(user));
+        response.success = true;
+        response.messsage = "Successfully"
       
         if(!user){
             //throw new Error(`User ${id} not found`);
-            r._id = id;
-            r.error = true;
-            r.result =JSON.parse( JSON.stringify(user) );
-            r.success = false;
-            r.messsage = "Unsuccessful"
-            return r;
+            response._id = id;
+            response.error = true;
+            response.result =JSON.parse( JSON.stringify(user) );
+            response.success = false;
+            response.messsage = "Unsuccessful"
+            return response;
         }
-        return r;
+        return response;
     }
 
     async deleteById(id: string): Promise<PostModelbyID | any>{ 
         const user = await this.PostModel.deleteOne({_id: id})
-        const r:PostModelbyID = new PostModelbyID();
+        const response:PostModelbyID = new PostModelbyID();
        
-        r.error = false;
-        r.success = true;
-        r.messsage = "Successfully Deleted";
+        response.error = false;
+        response.success = true;
+        response.messsage = "Successfully Deleted";
       
         if(!user.deletedCount){
-            //throw new Error(`User ${id} not found`);
-            r.error = true;
-            r.success = false;
-            r.messsage = "Unsuccessful Delete"
-            return r;
+            response.error = true;
+            response.success = false;
+            response.messsage = "Unsuccessful Delete"
+            return response;
         }
-        return r;
+        return response;
+    }
+
+    async deleteAll(): Promise<any>{
+        //return await this.PostModel.deleteMany();
+        return "dd"
+    }
+
+    async update(desc:any): Promise<PostModelbyID | any>{
+        const user  = await this.PostModel.findOne({_id: desc._id}).exec()
+        const response:PostModelbyID = new PostModelbyID();
+
+        if(!user) {
+            response._id = desc._id;
+            response.error = true;
+            //response.result =JSON.parse(JSON.stringify({"_id": desc._id, "description": desc.description, "channel":desc.channel}));
+            response.success = false;
+            response.messsage = "Not found"
+            return response;
+        }
+       
+        const updateuser  = await this.PostModel.updateOne( {_id: desc._id},{description: desc.description},{channel: desc.channel});
+     
+        response._id = desc._id;
+        response.error = false;
+        response.result =JSON.parse(JSON.stringify({"_id": desc._id, "description": desc.description, "channel":desc.channel}));
+        response.success = true;
+        response.messsage = "Successfully"
+
+        if(updateuser?.modifiedCount==0){
+            //throw new Error(`User ${id} not found`);
+            response._id = desc._id;
+            response.error = true;
+            response.result =JSON.parse(JSON.stringify({"_id": desc._id, "description": desc.description, "channel":desc.channel}));
+            response.success = false;
+            response.messsage = "Unsuccessful"
+            return response;
+        }
+        return response;
     }
 
 }

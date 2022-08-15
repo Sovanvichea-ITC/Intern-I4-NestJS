@@ -4,7 +4,7 @@
 
 type PostModel {
   id: ID!
-  description: String!
+  description: String
   channel: String!
 }
 
@@ -36,9 +36,16 @@ input PostInputByID {
 type Mutation {
   createPost(crepost: PostInput!): PostModel!
   delbyID(deletebyid: PostInputByID!): PostModelbyID!
+  updPost(updatePost: PostInputUpdateDes!): PostModelbyID!
 }
 
 input PostInput {
-  description: String!
+  description: String
+  channel: String!
+}
+
+input PostInputUpdateDes {
+  _id: String!
+  description: String
   channel: String!
 }

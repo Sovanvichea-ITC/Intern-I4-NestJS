@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { PostModel, PostModelbyID } from './post.model'
-import { PostInput, PostInputByID } from './post.input';
+import { PostInput, PostInputByID, PostInputUpdateDes } from './post.input';
 import {PostService} from './post.service'
 
 
@@ -27,6 +27,16 @@ export class PostResolver{
     async delbyID(@Args('deletebyid') deleteById: PostInputByID){
         return await this.PostService.deleteById(deleteById._id)
     }
+
+   
+    @Mutation(() => PostModelbyID)
+    async updPost(@Args('updatePost') desc: PostInputUpdateDes) {
+        //console.log(desc);
+        return await this.PostService.update(desc);
+    }
+
+
+    
 }
 
 

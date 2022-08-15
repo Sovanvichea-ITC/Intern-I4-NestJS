@@ -4,7 +4,7 @@ import { Field, ID, ObjectType } from "@nestjs/graphql"
 export class PostModel{
     @Field(()=> ID)
     id: string;
-    @Field()
+    @Field({nullable:true})
     description: string;
     @Field()
     channel: string;
@@ -40,4 +40,10 @@ export class PostModelbyID{
     @Field({nullable:true})
     messsage?: string;
     
+}
+
+
+export class PostModelDeleteAll{
+    @Field()
+    description: string
 }

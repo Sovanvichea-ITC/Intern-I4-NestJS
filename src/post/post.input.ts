@@ -2,8 +2,8 @@ import { Field, ID, InputType } from '@nestjs/graphql'
 
 @InputType()
 export class PostInput{
-   // @Field({nullable: true})
-    @Field()
+    @Field({nullable: true})
+   // @Field()
     readonly description: string;
     @Field()
     readonly channel: string;
@@ -14,4 +14,14 @@ export class PostInput{
 export class PostInputByID{
     @Field()
     readonly _id: string;
+}
+
+@InputType()
+export class PostInputUpdateDes{
+    @Field()
+    readonly _id: string;
+    @Field({nullable:true})
+    readonly description: string;
+    @Field()
+    readonly channel: string;
 }
