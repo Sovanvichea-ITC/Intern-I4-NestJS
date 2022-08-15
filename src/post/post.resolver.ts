@@ -17,12 +17,11 @@ export class PostResolver{
         return this.PostService.create(createpost);
     }
 
-    @Query(() => PostModel)
+    @Query(() => PostModelbyID, {nullable:true})
     async getOne(@Args('getById') findbyid: PostInputByID){
-        const user= await this.PostService.getById(findbyid._id)
-        if(!user){
-            return `User with id ${findbyid} not found`
-        }
+        console.log("ddd",findbyid)
+        const user = await this.PostService.getById(findbyid._id)
+        console.log(user)
         return user;
     }
 

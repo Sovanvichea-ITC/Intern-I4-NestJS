@@ -8,9 +8,25 @@ type PostModel {
   channel: String!
 }
 
+type Result1 {
+  _id: String!
+  description: String!
+  channel: String!
+}
+
+type PostModelbyID {
+  _id: ID
+  result: Result1
+  description: String
+  channel: String
+  success: Boolean
+  error: Boolean
+  messsage: String
+}
+
 type Query {
   getPost: [PostModel!]!
-  getOne(getById: PostInputByID!): PostModel!
+  getOne(getById: PostInputByID!): PostModelbyID
 }
 
 input PostInputByID {

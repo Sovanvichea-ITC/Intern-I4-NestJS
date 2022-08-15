@@ -5,12 +5,39 @@ export class PostModel{
     @Field(()=> ID)
     id: string;
     @Field()
-    readonly description: string;
+    description: string;
     @Field()
-    readonly channel: string;
+    channel: string;
 }
 
-export class PostModelbyID{
-    @Field(()=> ID)
+
+@ObjectType()
+export class Result1{
+    @Field()
     _id: string;
+    @Field()
+    description: string;
+    @Field()
+    channel: string;
+}
+
+
+
+@ObjectType()
+export class PostModelbyID{
+    @Field(()=> ID ,{nullable:true})
+    _id: string;
+    @Field({nullable:true})
+    result?:Result1;
+    @Field({nullable:true})
+    description?: string;
+    @Field({nullable:true})
+    channel?: string;
+    @Field({nullable:true})
+    success?: boolean;
+    @Field({nullable:true})
+    error?: boolean;
+    @Field({nullable:true})
+    messsage?: string;
+    
 }

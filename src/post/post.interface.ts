@@ -1,10 +1,13 @@
 import { Document} from "mongoose"
 
 export  interface PostALL extends Document {
-    description :string;
-    channel: string;
+    description : {
+        type: string,
+        required: false,
+    },
+    channel: {
+        type: string,
+        required: false,
+    },
 }
 
-export  interface PostByID extends Document {
-    _id: string;
-}
