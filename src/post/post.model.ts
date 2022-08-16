@@ -6,8 +6,12 @@ export class PostModel{
     id: string;
     @Field({nullable:true})
     description: string;
-    @Field()
+    @Field({nullable:true})
     channel: string;
+    @Field({nullable:true})
+    createdAt?: Date;
+    @Field({nullable:true})
+    updatedAt?: Date;
 }
 
 
@@ -15,10 +19,14 @@ export class PostModel{
 export class Result1{
     @Field()
     _id: string;
-    @Field()
+    @Field({nullable:true})
     description: string;
-    @Field()
+    @Field({nullable:true})
     channel: string;
+    @Field({nullable:true})
+    createdAt?: Date;
+    @Field({nullable:true})
+    updatedAt?: Date;
 }
 
 
@@ -39,6 +47,7 @@ export class PostModelbyID{
     error?: boolean;
     @Field({nullable:true})
     messsage?: string;
+    
     
 }
 

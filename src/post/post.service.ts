@@ -2,13 +2,13 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model , Types} from "mongoose";
 import { PostALL } from './post.interface';
 import { PostInput } from './post.input';
-import { PostModelbyID } from "./post.model";
-import { response } from "express";
+import { PostModel, PostModelbyID } from "./post.model";
+import {  } from "./post.model";
 
 export class PostService{
     constructor(@InjectModel('Post') private readonly PostModel: Model<PostALL>) {}
 
-    async create(post: PostInput): Promise<PostALL>{
+    async create(post: PostInput): Promise<PostModel | PostALL>{
         const create = new this.PostModel(post);
         return await create.save();
     }
@@ -19,11 +19,13 @@ export class PostService{
 
     async getById(id: string): Promise< PostModelbyID | PostALL >{
         const user  = await this.PostModel.findOne({_id: id}).exec();
+        //console.log('tag', JSON.parse(JSON.stringify(user)))
         const response:PostModelbyID = new PostModelbyID();
-      
         response._id = id;
         response.error = false;
         response.result =JSON.parse(JSON.stringify(user));
+
+       // console.log(response.result)
         response.success = true;
         response.messsage = "Successfully"
       
